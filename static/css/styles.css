@@ -1,0 +1,44 @@
+@font-face {
+    font-family: Oswald-Medium;
+    src: url(../fonts/Oswald-Medium.ttf);
+}
+
+body {
+    font-size: 100%;
+}
+
+.saVS-monitor-container {
+    font-family: Oswald-Medium !important;
+}
+
+.saVS-parm-lg {
+    font-size: 4em
+}
+
+.saVS-parm-sm {
+    font-size: 1em
+}
+
+.saVS-parm-md {
+    font-size: 4em
+}
+
+.saVS-ecg {
+    color:lawngreen
+}
+
+.saVS-spo2 {
+    color: skyblue
+}
+
+.saVS-nbp {
+    color: GhostWhite
+}
+
+.saVS-resp {
+    color: gold
+}
+
+.saVS-temp {
+    color:orange
+}
