@@ -30,17 +30,6 @@ To run these files on your own server:
 * Simulationist window; mirrors control window. Time-stamped record of learner's actions. Aids in debriefing.
 * Free. No charge.
 
-## Issues
-
-* [ ] ECG display
-* [ ] Make Signal generation more generic
-* [ ] Update [Usage](#usage)
-* [ ] Add Sounds (mourning, Breathing, Crying)
-* [ ] Add preprogrammable Scenarios to UI
-* [ ] Add manual sync (id) option
-* [ ] Move docs to Github Wiki
-* [ ] Use [Reactive.js](https://ractive.js.org/)
-
 ## Credits
 
 * [Smooth curve algorithm from Stack Overflow](https://stackoverflow.com/questions/7054272/how-to-draw-smooth-curve-through-n-points-using-javascript-html5-canvas) by [Homan](https://stackoverflow.com/users/793454/homan).
