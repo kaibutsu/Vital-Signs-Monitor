@@ -41,7 +41,7 @@ function drawSignals() {
 }
 
 if (!nIntervId) {
-  nIntervId = setInterval(drawSignals, 1000 / signalPixelsPerSecond);
+//  nIntervId = setInterval(drawSignals, 1000 / signalPixelsPerSecond);
 }
 
 function bufferNextCurve(context, bufferContext, bufferPointer, type="spo", eventRate = 60, amplitude = 0.9) {
@@ -101,7 +101,7 @@ function bufferNextCurve(context, bufferContext, bufferPointer, type="spo", even
 
 function animateSignal(context, bufferContext, bufferPointer, type="spo") {
   if (!(bufferPointer.pos < bufferPointer.size)) {
-    console.log("Buffering new event for", context.canvas.id)
+    //console.log("Buffering new event for", context.canvas.id)
     bufferNextCurve(context, bufferContext, bufferPointer, type);
   }
   bufferContext.save;

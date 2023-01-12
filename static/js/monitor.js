@@ -565,9 +565,9 @@ function playSound(audio) {
 function onLoadFunction() {
      bpSound = loadSound('./static/sounds/pump.mp3');
      initialize();
-     //conectToPeer();
+     conectToPeer();
      // use the functions below to set initial conditions
-     setECG(false);
+     //setECG(false);
      setPatientData('Name: ', 'John Smith', 'ID: ', '234-56789', 'DOB: ', 'July 23, 1964');
      setBloodPressure(120, 80);
      setTemperature(true, 37.0);
