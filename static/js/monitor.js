@@ -106,11 +106,9 @@ function getUrlParam(name) {
 }
 
 function hideLoginBox() {
-     let ids = ['log1', 'log2', 'log3'];
-     let indx;
-     for (indx = 0; indx < ids.length; indx++) {
-          document.getElementById(ids[indx]).style.display = 'none';
-          document.getElementById(ids[indx]).style.zIndex = '0';
+     for (id in ['log1', 'log2', 'log3']) {
+          document.getElementById(id).style.display = 'none';
+          document.getElementById(id).style.zIndex = '0';
      }
 }
 

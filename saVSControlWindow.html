@@ -182,6 +182,7 @@ function transmitVariables(){
  }
   if (transV.length > 6){
      transV = encodeURI(transV);
+     console.log(transV)
      if (mconn && mconn.open){
          mconn.send(transV);
          update('Update vitals at ' + timeStamp() + ' . . .<br/>\n' + setS + '. . . end vitals update<br/>\n');
