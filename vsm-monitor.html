@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+     <title>Vital Signs Monitor</title>
+     <meta http-equiv="imagetoolbar" content="no" />
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+     <link rel="icon" type="image/svg" href="./static/logos/favicon.svg">
+     <link rel="stylesheet" href="./static/css/styles.css">
+     <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css">
+</head>
+
+<body class="text-bg-dark">
+     &nbsp;
+     <div id="ractive-target" class="container saVS-monitor-container">
+          <!-- should actually be
+          <script id="ractive-template" type="text/ractive">
+          -->
+          <script id="ractive-template" type="text/html">
+               <div class="navbar navbar-expand-lg bg-dark">
+                    <div class="navbar-brand text-bg-dark">
+                         <img src="./static/logos/logo.png" alt="User Logo" height="32rem">
+                    </div>
+                    <div class="text-end font-monospace"><span id="isconnect">not connected</span></div>
+               </div>
+               <div>
+                    {{ patient_data.vitals.hf.display }}
+               </div>
+               <div>
+                    {{ patient_data.vitals.spO2.display }}
+               </div>
+          </script>
+     </div>
+</body>
+<canvas id="spoBufferCanvas" hidden></canvas>
+<canvas id="ecgBufferCanvas" hidden></canvas>
+<canvas id="respBufferCanvas" hidden></canvas>
+
+<script src="./static/lib/js/ractive.min.js"></script>
+<script src="./static/lib/js/bootstrap.bundle.min.js"></script>
+<script src="./static/lib/js/peerjs.min.js"></script>
+<script src="./static/js/monitor.js"></script>
+
+</html>
