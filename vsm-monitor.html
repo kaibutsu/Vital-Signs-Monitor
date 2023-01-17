@@ -2,40 +2,134 @@
 <html>
 
 <head>
-     <title>Vital Signs Monitor</title>
-     <meta http-equiv="imagetoolbar" content="no" />
-     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-     <link rel="icon" type="image/svg" href="./static/logos/favicon.svg">
-     <link rel="stylesheet" href="./static/css/styles.css">
-     <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css">
+    <title>Vital Signs Monitor</title>
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="icon" type="image/svg" href="./static/logos/favicon.svg">
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css">
 </head>
 
 <body class="text-bg-dark">
-     &nbsp;
-     <div id="ractive-target" class="container saVS-monitor-container">
-          <!-- should actually be
-          <script id="ractive-template" type="text/ractive">
-          -->
-          <script id="ractive-template" type="text/html">
-               <div class="navbar navbar-expand-lg bg-dark">
-                    <div class="navbar-brand text-bg-dark">
-                         <img src="./static/logos/logo.png" alt="User Logo" height="32rem">
+    &nbsp;
+    <div id="ractive-target" class="container saVS-monitor-container">
+        <!-- should actually be
+        <script id="ractive-template" type="text/ractive">
+        (but then code highlighting doesn't work...) -->
+        <script id="ractive-template" type="text/html">
+        <div class="navbar navbar-expand-lg bg-dark">
+            <div class="navbar-brand text-bg-dark">
+                <img src="./static/logos/logo.png" alt="User Logo" height="32rem">
+            </div>
+            {{#if connecting}}
+            <div class="text-end font-monospace" >Connecting to {{peerjs_id}}</div>
+            {{elseif connected}}
+            <div class="text-end font-monospace" >Connected to {{peerjs_id}}</div>
+            {{else}}
+            <div class="text-end font-monospace" >Not connected</div>
+            {{/if}}
+        </div>
+            <div class="alert alert-success p-1 row">
+                <div class="col-4">
+                    {{ patient.fullName }}
+                </div>
+                <div class="col-4">
+                    *{{ patient.dob.toLocaleDateString() }}
+                </div>
+                <div class="col-4">
+                    {{ display.dateTime }}
+                </div>
+                </div>
+                {{#if display.triggers.ecg}}
+                <div class="row saVS-ecg saVS-parm-sm">
+                    <div class="col-1">
+                        <span>ECG - II</span>
                     </div>
-                    <div class="text-end font-monospace"><span id="isconnect">not connected</span></div>
+                    <div class="col-7"></div>
+                    <div class="col-4"> HR<sub>ECG</sub> (bpm)</div>
+                </div>
+                <div class="row saVS-ecg saVS-parm-lg">
+                    <div class="col-8">
+                         <canvas id="ecgBufferCanvas" hidden></canvas>
+                         <canvas id="ecgSigCanvas"></canvas>
+                    </div>
+                    <div class="col-4">
+                         {{ display.hf }}
+                    </div>
                </div>
-               <div>
-                    {{ patient_data.vitals.hf.display }}
+               {{/if}}
+               {{#if display.triggers.spO2}}
+               <div class="row saVS-spo2 saVS-parm-sm">
+                    <div class="col-1">
+                         <span>Pleth</span>
+                    </div>
+                    <div class="col-7"></div>
+                    <div class="col-2">
+                         SpO<sub>2</sub> (%)
+                    </div>
+                    <div class="col-2">
+                         <div>HR<sub>Pleth</sub> (bpm)</div>
+                    </div>
                </div>
-               <div>
-                    {{ patient_data.vitals.spO2.display }}
+               <div class="row saVS-spo2 saVS-parm-lg">
+                    <div class="col-8">
+                         <canvas id="spO2BufferCanvas" hidden></canvas>
+                         <canvas id="spO2SigCanvas"></canvas>
+                    </div>
+                    <div class="col-2">
+                         {{ display.spO2 }}
+                    </div>
+                    <div class="col-2">
+                         <span id="pul">--</span>
+                    </div>
                </div>
+               {{/if}}
+               {{#if display.triggers.resp}}
+               <canvas id="respBufferCanvas" hidden></canvas>
+               <div class="row saVS-resp saVS-parm-sm">
+                    <div class="col-1">
+                         Resp
+                    </div>
+                    <div class="col-7"></div>
+                    <div class="col-4">
+                         BR (bpm)
+                    </div>
+               </div>
+               <div class="row saVS-resp saVS-parm-lg">
+                    <div class="col-8">
+                         <canvas id="respSigCanvas"></canvas>
+                    </div>
+                    <div class="col-4">
+                         <span id="res">----</span>
+                    </div>
+               </div>
+               {{/if}}
+               {{#if (display.triggers.bp || display.triggers.temp)}}
+               <div class="row saVS-parm-sm">
+                    <div class="col-1 saVS-nbp">{{#if display.triggers.bp}}NBP{{/if}}</div>
+                    <div class="col-9"></div>
+                    <div class="col-2 saVS-temp">{{#if display.triggers.temp}}Temp (<span id="cf">&deg;C</span>){{/if}}</div>
+               </div>
+               <div class="row saVS-parm-lg">
+                    <div class="col-6 saVS-nbp">
+                         {{#if display.triggers.bp}}
+                         <span id="sys">---- /</span>
+                         <span id="dia"> ----</span>
+                         (<span id="map">----</span>)
+                         {{/if}}
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-2 saVS-temp">
+                         {{#if display.triggers.temp}}
+                         <span id="tempCF" class="tempCF">---.-</span>
+                         {{/if}}
+                    </div>
+               </div>
+               {{/if}}
           </script>
-     </div>
+    </div>
 </body>
-<canvas id="spoBufferCanvas" hidden></canvas>
-<canvas id="ecgBufferCanvas" hidden></canvas>
-<canvas id="respBufferCanvas" hidden></canvas>
 
 <script src="./static/lib/js/ractive.min.js"></script>
 <script src="./static/lib/js/bootstrap.bundle.min.js"></script>
