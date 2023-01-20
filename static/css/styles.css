@@ -22,23 +22,3 @@ body {
 .saVS-parm-md {
     font-size: 4em
 }
-
-.saVS-ecg {
-    color:lawngreen
-}
-
-.saVS-spo2 {
-    color: skyblue
-}
-
-.saVS-nbp {
-    color: GhostWhite
-}
-
-.saVS-resp {
-    color: gold
-}
-
-.saVS-temp {
-    color:orange
-}
