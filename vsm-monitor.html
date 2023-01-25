@@ -16,18 +16,13 @@
     <div id="ractive-target" class="container monitor-container">
         <!-- should actually be
         <script id="ractive-template" type="text/ractive">
-        (but then code highlighting doesn't work...) -->
+        (but then code highlighting doesn't work...)    -->
         <script id="ractive-template" type="text/html">
-            <div class="navbar navbar-expand-lg bg-dark">
-                <div class="navbar-brand text-bg-dark">
-                    <img src="./static/logos/logo.png" alt="User Logo" height="32rem">
-                </div>
-            </div>
+        <!--                                            -->
             <div class="text-end font-monospace" >{{ display.connectionStatus  }}</div>
-            <div class="alert alert-success p-1 row">
-                <div class="col-4">{{ patient.fullName }}</div>
-                <div class="col-4">*{{ patient.dob.toLocaleDateString() }}</div>
-                <div class="col-4">{{ display.dateTime }}</div>
+            <div class="row mb-2 rounded text-bg-light">
+                <div class="col-8 text-start">{{ patient.fullName }} *{{ patient.dob.toLocaleDateString() }}</div>
+                <div class="col-4 text-end">{{ display.dateTime }}</div>
             </div>
             <div {{^display.triggers.ecg}}hidden{{/display.triggers.ecg}} {{ 'style="color: ' + display.colors.ecg + ';"'}}>
                 <div class="row parm-sm">
@@ -101,11 +96,27 @@
                     </div>
                 </div>
             </div>
-            <input type="checkbox" checked='{{display.triggers.ecg}}'> ECG
-            <input type="checkbox" checked='{{display.triggers.spO2}}'> Pleth
-            <input type="checkbox" checked='{{display.triggers.resp}}'> Resp
-            <input type="checkbox" checked='{{display.triggers.nbp}}'> NBP
-            <input type="checkbox" checked='{{display.triggers.temp}}'> Temp
+            <hr>
+            <div class="row text-center">
+                {{#with display.triggers}}
+                <div class="col">
+                    <a class="trigger-button btn btn-{{^ecg}}outline-{{/ecg}}light" on-click="@.toggle('display.triggers.ecg')">ECG</a>
+                </div>
+                <div class="col">
+                    <a class="trigger-button btn btn-{{^spO2}}outline-{{/spO2}}light" on-click="@.toggle('display.triggers.spO2')">SpO<sub>2</sub></a>
+                </div>
+                <div class="col">
+                    <a class="trigger-button btn btn-{{^resp}}outline-{{/resp}}light" on-click="@.toggle('display.triggers.resp')">Resp</a>
+                </div>
+                <div class="col">
+                    <a class="trigger-button btn btn-{{^nbp}}outline-{{/nbp}}light" on-click="@.toggle('display.triggers.nbp')">NBP</a>
+                </div>
+                <div class="col">
+                    <a class="trigger-button btn btn-{{^temp}}outline-{{/temp}}light" on-click="@.toggle('display.triggers.temp')">Temp</a>
+                </div>
+                {{/with}}
+                <div class="col-4"></div>
+            </div>
         </script>
     </div>
 </body>
