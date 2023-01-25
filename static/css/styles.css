@@ -5,20 +5,30 @@
 
 body {
     font-size: 100%;
-}
-
-.saVS-monitor-container {
     font-family: Oswald-Medium !important;
 }
 
-.saVS-parm-lg {
-    font-size: 4em
+.signal-canvas {
+    height: 100%;
+    width: 100%;
 }
 
-.saVS-parm-sm {
+.monitor-container {
+    font-family: Oswald-Medium !important;
+}
+
+.signal-column {
+    height: 100px;
+}
+
+.parm-lg {
+    font-size: 4em;
+}
+
+.parm-sm {
     font-size: 1em
 }
 
-.saVS-parm-md {
+.parm-md {
     font-size: 4em
 }

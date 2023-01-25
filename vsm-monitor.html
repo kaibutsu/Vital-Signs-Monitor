@@ -13,7 +13,7 @@
 
 <body class="text-bg-dark">
     &nbsp;
-    <div id="ractive-target" class="container saVS-monitor-container">
+    <div id="ractive-target" class="container monitor-container">
         <!-- should actually be
         <script id="ractive-template" type="text/ractive">
         (but then code highlighting doesn't work...) -->
@@ -30,51 +30,51 @@
                 <div class="col-4">{{ display.dateTime }}</div>
             </div>
             <div {{^display.triggers.ecg}}hidden{{/display.triggers.ecg}} {{ 'style="color: ' + display.colors.ecg + ';"'}}>
-                <div class="row saVS-parm-sm">
+                <div class="row parm-sm">
                     <div class="col-1">ECG - II</div>
                     <div class="col-7"></div>
                     <div class="col-4">HR<sub>ECG</sub> (bpm)</div>
                 </div>
-                <div class="row saVS-parm-lg">
-                    <div class="col-8">
-                        <canvas id="ecgBufferCanvas" hidden></canvas>
-                        <canvas id="ecgSigCanvas"></canvas>
+                <div class="row parm-lg">
+                    <div class="col-8 signal-column">
+                        <canvas class="buffer-canvas" id="ecgBufferCanvas" hidden></canvas>
+                        <canvas class="signal-canvas" id="ecgSigCanvas"></canvas>
                     </div>
-                    <div class="col-4">{{ display.hfEcg }}</div>
+                    <div class="col-4"><span>{{ display.hfEcg }}</span></div>
                 </div>
             </div>
             <div {{^display.triggers.spO2}}hidden{{/display.triggers.spO2}} {{ 'style="color: ' + display.colors.spO2 + ';"'}}>
-                <div class="row saVS-parm-sm">
+                <div class="row parm-sm">
                     <div class="col-1">Pleth</div>
                     <div class="col-7"></div>
                     <div class="col-2">SpO<sub>2</sub> (%)</div>
                     <div class="col-2">HR<sub>Pleth</sub> (bpm)</div>
                 </div>
-                <div class="row saVS-parm-lg">
-                    <div class="col-8">
-                        <canvas id="spO2BufferCanvas" hidden></canvas>
-                        <canvas id="spO2SigCanvas"></canvas>
+                <div class="row parm-lg">
+                    <div class="col-8 signal-column">
+                        <canvas class="buffer-canvas" id="spO2BufferCanvas" hidden></canvas>
+                        <canvas class="signal-canvas" id="spO2SigCanvas"></canvas>
                     </div>
                     <div class="col-2">{{ display.spO2 }}</div>
                     <div class="col-2">{{ display.hfSpO2 }}</div>
                 </div>
             </div>
             <div {{^display.triggers.resp}}hidden{{/display.triggers.resp}} {{ 'style="color: ' + display.colors.resp + ';"'}}>
-                <div class="row saVS-parm-sm">
+                <div class="row parm-sm">
                     <div class="col-1">Resp</div>
                     <div class="col-7"></div>
                     <div class="col-4">BR (bpm)</div>
                 </div>
-                <div class="row saVS-parm-lg">
-                    <div class="col-8">
-                        <canvas id="respBufferCanvas" hidden></canvas>
-                        <canvas id="respSigCanvas"></canvas>
+                <div class="row parm-lg">
+                    <div class="col-8 signal-column">
+                        <canvas class="buffer-canvas" id="respBufferCanvas" hidden></canvas>
+                        <canvas class="signal-canvas" id="respSigCanvas"></canvas>
                     </div>
                     <div class="col-4">{{ display.resp }}</div>
                 </div>
             </div>
             <div {{#unless (display.triggers.nbp || display.triggers.temp)}}hidden{{/unless}}>
-                <div class="row saVS-parm-sm">
+                <div class="row parm-sm">
                     <div class="col-1" {{'style="color: ' + display.colors.nbp + ';"'}}>
                         <span {{^display.triggers.nbp}}hidden{{/display.triggers.nbp}}>
                             NBP
@@ -87,7 +87,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="row saVS-parm-lg">
+                <div class="row parm-lg">
                     <div class="col-6" {{'style="color: ' + display.colors.nbp + ';"'}}>
                         <span {{^display.triggers.nbp}}hidden{{/display.triggers.nbp}}>
                             {{ display.nbpSys + "/" + display.nbpDia + " (" + (2 * display.nbpDia + display.nbpSys)/3 + ")"}}
