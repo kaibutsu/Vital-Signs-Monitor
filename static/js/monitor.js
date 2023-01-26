@@ -3,13 +3,15 @@ ractive = new Ractive({
     template: '#ractive-template',
     data: {
         patient: new Patient(
-            firstName = "John",
-            surname = "Doe",
-            dob = new Date("1970-01-01T00:00:00"),
-            pid = "123456789",
+            firstName = 'John',
+            surname = 'Doe',
+            dob = new Date('1970-01-01T00:00:00'),
+            pid = '123456789',
         ),
         vitals: {
             hfEcg: new VitalDefinition(
+                name = 'hfEcg',
+                title = 'HF<sub>ECG</sub> (bpm)',
                 target = 60,
                 min = 0,
                 max = 230,
@@ -17,29 +19,35 @@ ractive = new Ractive({
                 varAmp = 1,
                 initDelay = 1000,
                 trigger = 'ecg',
-                override = false,
+                override = '',
             ),
-            hfSpO2: new VitalDefinition(
+            hfPleth: new VitalDefinition(
+                name = 'hfPleth',
+                title = 'HF<sub>Pleth</sub> (bpm)',
                 target = 60,
                 min = 0,
                 max = 230,
                 varFreq = 2000,
                 varAmp = 2,
                 initDelay = 10000,
-                trigger = 'spO2',
+                trigger = 'pleth',
                 override = 'hfEcg',
             ),
-            spO2: new VitalDefinition(
+            pleth: new VitalDefinition(
+                name = 'pleth',
+                title = 'SpO<sub>2</sub> (%)',
                 target = 100,
                 min = 21,
                 max = 100,
                 varFreq = 2000,
                 varAmp = 1,
                 initDelay = 10000,
-                trigger = 'spO2',
-                override = false,
+                trigger = 'pleth',
+                override = '',
             ),
             resp: new VitalDefinition(
+                name = 'resp',
+                title = 'Resp (bpm)',
                 target = 14,
                 min = 0,
                 max = 180,
@@ -47,9 +55,11 @@ ractive = new Ractive({
                 varAmp = 5,
                 initDelay = 3000,
                 trigger = 'resp',
-                override = false,
+                override = '',
             ),
             nbpSys: new VitalDefinition(
+                name = 'nbpSys',
+                title = 'NPB<sub>SYS</sub> (mmHg)',
                 target = 120,
                 min = 30,
                 max = 220,
@@ -57,9 +67,11 @@ ractive = new Ractive({
                 varAmp = null,
                 initDelay = 30000,
                 trigger = 'nbp',
-                override = false,
+                override = '',
             ),
             nbpDia: new VitalDefinition(
+                name = 'nbpDia',
+                title = 'NPB<sub>DIA</sub> (mmHg)',
                 target = 60,
                 min = 20,
                 max = 100,
@@ -67,9 +79,11 @@ ractive = new Ractive({
                 varAmp = null,
                 initDelay = 30000,
                 trigger = 'nbp',
-                override = false,
+                override = '',
             ),
             temp: new VitalDefinition(
+                name = 'temp',
+                title = 'Temp (&deg;C)',
                 target = 37.5,
                 min = 36.0,
                 max = 41.5,
@@ -77,31 +91,37 @@ ractive = new Ractive({
                 varAmp = 0.5,
                 initDelay = 30000,
                 trigger = 'temp',
-                override = false,
+                override = '',
             ),
         },
         display: {
             colors: {
-                ecg: "lawngreen",
-                spO2: "skyblue",
-                nbp: "GhostWhite",
-                resp: "gold",
-                temp: "orange",
+                ecg: 'lawngreen',
+                pleth: 'skyblue',
+                nbp: 'GhostWhite',
+                resp: 'gold',
+                temp: 'orange',
             },
             signals: {
-                spO2: new SignalDefinition(
+                pleth: new SignalDefinition(
+                    name = 'pleth',
+                    title = 'Pleth',
                     eventParameter = 'hfEcg',
-                    trigger = 'spO2'),
+                    trigger = 'pleth'),
                 ecg: new SignalDefinition(
+                    name = 'ecg',
+                    title = 'ECG',
                     eventParameter = 'hfEcg',
                     trigger = 'ecg'),
                 resp: new SignalDefinition(
+                    name = 'resp',
+                    title = 'Resp',
                     eventParameter = 'resp',
                     trigger = 'resp'),
             },
             triggers: {
                 ecg: true,
-                spO2: true,
+                pleth: true,
                 resp: false,
                 nbp: false,
                 temp: false,
@@ -118,15 +138,15 @@ ractive.observe('display.triggers.*', (newValue, oldValue, keypath) => {
             updateCanvas(signalName)
         }
     })
-}, {'init': false, 'defer': true });
+}, { 'init': false, 'defer': true });
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
     Object.entries(ractive.get('display.signals')).forEach(([signalName, signalDef]) => {
         updateCanvas(signalName);
     })
 });
 
-Object.entries(ractive.get("display.signals")).forEach(([signalName, signalDef]) => {
+Object.entries(ractive.get('display.signals')).forEach(([signalName, signalDef]) => {
     initCanvasContexts(signalName);
     bufferPointers[signalName] = {
         pos: 0,

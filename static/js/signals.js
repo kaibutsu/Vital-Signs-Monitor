@@ -1,6 +1,6 @@
 function getCurvePoints(signalName, bufferWidth, minValue, maxSigHeight) {
     switch (signalName) {
-        case 'spO2':
+        case 'pleth':
             return [
                 { x: 0.0 * bufferWidth, y: minValue - 0.0 * maxSigHeight },
                 { x: 0.1 * bufferWidth, y: minValue - 0.0 * maxSigHeight },

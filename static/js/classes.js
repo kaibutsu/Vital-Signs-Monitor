@@ -1,18 +1,22 @@
 class VitalDefinition {
-    constructor(target, min, max, varFreq, varAmp, initDelay, trigger, override) {
-        this.target = target
-        this.min = min
-        this.max = max
-        this.varFreq = varFreq
-        this.varAmp = varAmp
-        this.initDelay = initDelay
-        this.trigger = trigger
-        this.override = override
+    constructor(name, title, target, min, max, varFreq, varAmp, initDelay, trigger, override) {
+        this.name = name;
+        this.title = title;
+        this.target = target;
+        this.min = min;
+        this.max = max;
+        this.varFreq = varFreq;
+        this.varAmp = varAmp;
+        this.initDelay = initDelay;
+        this.trigger = trigger;
+        this.override = override;
     }
 }
 
 class SignalDefinition {
-    constructor(eventParameter, trigger) {
+    constructor(name, title, eventParameter, trigger) {
+        this.name = name;
+        this.title = title;
         this.eventParameter = eventParameter;
         this.trigger = trigger;
     }
@@ -24,14 +28,14 @@ class Patient {
     dob = new Date("1970-01-01T00:00:00")
     pid = "123456789"
     constructor(firstName, surname, dob, pid) {
-        this.firstName = firstName
-        this.surname = surname
-        this.dob = dob
-        this.pid = pid
+        this.firstName = firstName;
+        this.surname = surname;
+        this.dob = dob;
+        this.pid = pid;
     }
 
     get fullName() {
-        return this.surname + ", " + this.firstName
+        return this.surname + ", " + this.firstName;
     }
 
     get ymdDob() {
