@@ -2,12 +2,11 @@
 
 *A virtual Vital Signs Monitor that runs in a web browser and can be controlled remotely via a peer-to-peer connection.*
 
-This project is based on [Barry Robinson's Vital Signs Monitor](https://github.com/BarryRobinson/Vital-Signs-Monitor).
+This project is greatly influenced by [Barry Robinson's Vital Signs Monitor](https://github.com/BarryRobinson/Vital-Signs-Monitor).
 
 - [Vital-Signs-Monitor](#vital-signs-monitor)
   - [Usage](#usage)
   - [Features](#features)
-  - [Issues](#issues)
   - [Credits](#credits)
 
 ## Usage
