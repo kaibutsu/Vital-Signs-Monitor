@@ -125,6 +125,7 @@ ractive = new Ractive({
                 resp: false,
                 nbp: false,
                 temp: false,
+                rBeep: false,
             },
         },
         connected: false,
@@ -138,6 +139,9 @@ ractive.observe('display.triggers.*', (newValue, oldValue, keypath) => {
             updateCanvas(signalName)
         }
     })
+    if (triggerName === "rBeep") {
+        newValue ? monitorAudioContext = new AudioContext() : monitorAudioContext.close();
+    }
 }, { 'init': false, 'defer': true });
 
 window.addEventListener('resize', () => {
@@ -159,13 +163,24 @@ Object.entries(ractive.get('display.signals')).forEach(([signalName, signalDef])
 })
 
 if (!busTimer) {
-    busTimer = setInterval(updateMonitor, updateInterval)
+    busTimer = setInterval(() => {
+        updateMonitor();
+    }, updateInterval)
 }
 
 if (!signalUpdateTimer) {
     signalUpdateTimer = setInterval(() => {
         Object.entries(ractive.get('display.signals')).forEach(([signalName, signalDef]) => {
             animateSignal(signalName)
-        })
+        });
+        ecgBufferPointer = bufferPointers['ecg']
+        if (ractive.get('display.triggers.rBeep') & (!(ecgBufferPointer.pos < ecgBufferPointer.size))) {
+            beep(
+                150,
+                220 + (220/100*ractive.get('display.pleth')),
+                100,
+                monitorAudioContext
+            );
+        }
     }, 1000 / signalPixelsPerSecond);
 }
