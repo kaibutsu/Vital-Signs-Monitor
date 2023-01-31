@@ -1,6 +1,6 @@
 class VitalDefinition {
-    constructor(name, title, target, min, max, varFreq, varAmp, initDelay, trigger, override) {
-        this.name = name;
+    constructor(id, title, target, min, max, varFreq, varAmp, initDelay, trigger, override) {
+        this.id = id;
         this.title = title;
         this.target = target;
         this.min = min;
@@ -14,8 +14,8 @@ class VitalDefinition {
 }
 
 class SignalDefinition {
-    constructor(name, title, eventParameter, trigger) {
-        this.name = name;
+    constructor(id, title, eventParameter, trigger) {
+        this.id = id;
         this.title = title;
         this.eventParameter = eventParameter;
         this.trigger = trigger;

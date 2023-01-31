@@ -10,7 +10,7 @@ ractive = new Ractive({
         ),
         vitals: {
             hfEcg: new VitalDefinition(
-                name = 'hfEcg',
+                id = 'hfEcg',
                 title = 'HF<sub>ECG</sub> (bpm)',
                 target = 60,
                 min = 0,
@@ -22,7 +22,7 @@ ractive = new Ractive({
                 override = '',
             ),
             hfPleth: new VitalDefinition(
-                name = 'hfPleth',
+                id = 'hfPleth',
                 title = 'HF<sub>Pleth</sub> (bpm)',
                 target = 60,
                 min = 0,
@@ -34,7 +34,7 @@ ractive = new Ractive({
                 override = 'hfEcg',
             ),
             pleth: new VitalDefinition(
-                name = 'pleth',
+                id = 'pleth',
                 title = 'SpO<sub>2</sub> (%)',
                 target = 100,
                 min = 21,
@@ -46,7 +46,7 @@ ractive = new Ractive({
                 override = '',
             ),
             resp: new VitalDefinition(
-                name = 'resp',
+                id = 'resp',
                 title = 'Resp (bpm)',
                 target = 14,
                 min = 0,
@@ -58,7 +58,7 @@ ractive = new Ractive({
                 override = '',
             ),
             nbpSys: new VitalDefinition(
-                name = 'nbpSys',
+                id = 'nbpSys',
                 title = 'NPB<sub>SYS</sub> (mmHg)',
                 target = 120,
                 min = 30,
@@ -70,7 +70,7 @@ ractive = new Ractive({
                 override = '',
             ),
             nbpDia: new VitalDefinition(
-                name = 'nbpDia',
+                id = 'nbpDia',
                 title = 'NPB<sub>DIA</sub> (mmHg)',
                 target = 60,
                 min = 20,
@@ -82,7 +82,7 @@ ractive = new Ractive({
                 override = '',
             ),
             temp: new VitalDefinition(
-                name = 'temp',
+                id = 'temp',
                 title = 'Temp (&deg;C)',
                 target = 37.5,
                 min = 36.0,
@@ -104,17 +104,17 @@ ractive = new Ractive({
             },
             signals: {
                 pleth: new SignalDefinition(
-                    name = 'pleth',
+                    id = 'pleth',
                     title = 'Pleth',
                     eventParameter = 'hfEcg',
                     trigger = 'pleth'),
                 ecg: new SignalDefinition(
-                    name = 'ecg',
+                    id = 'ecg',
                     title = 'ECG',
                     eventParameter = 'hfEcg',
                     trigger = 'ecg'),
                 resp: new SignalDefinition(
-                    name = 'resp',
+                    id = 'resp',
                     title = 'Resp',
                     eventParameter = 'resp',
                     trigger = 'resp'),
